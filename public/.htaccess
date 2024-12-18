@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /birthday-tefa/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /birthday-tefa/index.html [L] 

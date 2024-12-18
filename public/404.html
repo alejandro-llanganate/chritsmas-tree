@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirigiendo...</title>
+    <script>
+        const segment = 1;
+        const path = window.location.pathname;
+        const base = '/birthday-tefa';
+        
+        if (path.startsWith(base)) {
+            window.location.href = base + '/#' + path.slice(base.length);
+        } else {
+            window.location.href = base + '/#' + path;
+        }
+    </script>
+</head>
+<body>
+    <p>Redirigiendo...</p>
+</body>
+</html> 
