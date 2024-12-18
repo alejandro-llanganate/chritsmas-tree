@@ -1,0 +1,197 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Introducción - El Buzón de Pistas de Tefa">
+  <main>
+    <div class="intro-container">
+      <h1 class="intro-title sparkle">Lecciones aprendidas</h1>
+
+      <div class="intro-content">
+        <p class="intro-text float">
+          Antes de comenzar quiero compartirte mis lecciones aprendidas, lamento
+          mucho haber fallado, pero más importante es saber en qué para mejorar
+          hoy día,
+        </p>
+        <p class="intro-text">
+          <strong>1.</strong> Es importante no solo tener una escucha activa, sino
+          poder esas palabras materializados en actos que nos ayuden a crecer.
+        </p>
+        <p class="intro-text">
+          <strong>2.</strong> No vives sola, las horas importan, las formas de llegada
+          y salida importan, cuidar la forma en como tu familia se preocupa por ti
+          importa. Fue una muy mala idea quedarnos hasta tan tarde.
+        </p>
+        <p class="intro-text">
+          <strong>3.</strong> Si fue linda la vista, pero contigo a lado mío cualquier
+          vista es perfecta. En tu cumpleaños no debe resaltar lo que yo te quiera
+          mostrar al mundo, porque eso podría hacerlo otros días, sino debe resaltar
+          como tu ves el mundo y como eso se conecta de una forma para ti. Es tu
+          día, tu decides, es tu día para pedir lo que tu quieras.
+        </p>
+        <p class="intro-text">
+          <strong>4.</strong> Un cuarto significa bastante, un espacio no es en si
+          solo una habitación o una sala, puede representar algo más para el otro.
+          Por lo cual, mientras no estemos casados evitar cualquier forma que se
+          asimile a un espacio compartido que tenga una ambiguedad que pueda lastimar
+          al otro.
+        </p>
+        <p class="intro-text">
+          <strong>5.</strong> Un cuarto significa bastante, un espacio no es en si
+          solo una habitación o una sala, puede representar algo más para el otro.
+          Por lo cual, mientras no estemos casados evitar cualquier forma que se
+          asimile a un espacio compartido que tenga una ambiguedad que pueda lastimar
+          al otro.
+        </p>
+        <p class="intro-text">
+          <strong>6.</strong> Las pistas más claras eran nuestro chat, la cena, no
+          volver a dejar pasar que se acabe una salida sin encontrar comida. Era
+          lógico que a esa hora era imposible conseguir algo rico, por lo cual las
+          comidas importan, y no significa consentir únicamente sino cuidar.
+        </p>
+        <p class="intro-text">
+          <strong>7.</strong> No colapsar con tantas tareas y sobreexplotarme porque
+          no voy a rendir. No había dormido nada, mi cabeza estaba bloqueada, y de
+          las opciones que tuve escogí la más érro
+        </p>
+        <p class="intro-text">
+          <strong>8.</strong> Las experiencias pasadas si importan, sobre todo cuando
+          un rasgo de ellas se pueden ver reflejadas en nuestro presente. Mil veces
+          es mejor preguntar que dar una sorpresa ciega, que no considere algo que
+          se podía venir.
+        </p>
+        <p class="intro-text">
+          <strong>9.</strong> Ir con calma, no acelerar en las sorpresas, buscar
+          espacios que nos hagan sentir no un 50% cómodos, sino un 99.9999% cómodos
+          siempre buscando el 100% es lo que nos merecemos.
+        </p>
+        <p class="intro-text">
+          <strong>10.</strong> Pueden ser señales o pruebas, pero una prueba que
+          no se lucha con alma, corazón y cerebro termina siendo una señal de que
+          no es el camino. Yo quiero luchar, no quiero rendirme, quiero que en este
+          momento malo sepas que puedo dar más y que eso encontrarás en mi.
+        </p>
+      </div>
+
+      <div class="navigation-container">
+        <p class="next-step-text">
+          Ahora que has leído estas lecciones, ¿estás lista para comenzar tu aventura? 
+          Te esperan 10 pistas especiales 🎁
+        </p>
+        
+        <div class="navigation">
+          <a href="/" class="nav-button secondary">← Volver</a>
+          <a href="/tablero-pistas" class="nav-button primary">
+            <span class="button-text">Descubrir Pistas</span>
+            <span class="button-icon">🎯</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .intro-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .intro-title {
+    font-size: 2.5rem;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .intro-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  .intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+  }
+
+  .navigation-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .next-step-text {
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .nav-button.primary {
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+  }
+
+  .nav-button.secondary {
+    background: white;
+    color: #ff1493;
+    border: 2px solid #ff69b4;
+  }
+
+  .nav-button:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-button.primary:hover {
+    box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+  }
+
+  .button-icon {
+    font-size: 1.2em;
+  }
+
+  @media (max-width: 480px) {
+    .navigation {
+      flex-direction: column;
+    }
+
+    .nav-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

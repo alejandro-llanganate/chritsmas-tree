@@ -1,0 +1,614 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const pistas = [
+    {
+        id: 1,
+        titulo: "Desayuno",
+        pregunta: "¿Qué te gustaría desayunar?",
+        tipo: "select",
+        opciones: [
+            "MacDonalds (lo que ayer queríamos)",
+            "Desayuno Continental",
+            "Hornado",
+            "Bolón",
+            "Otra cosa",
+        ],
+    },
+    {
+        id: 2,
+        titulo: "Pista Libre",
+        pregunta:
+            "Déjame una pista libre, puede ser una palabra, oración o lo que quieras",
+        tipo: "text",
+    },
+    {
+        id: 3,
+        titulo: "Fotografía",
+        pregunta:
+            "¿A qué hora del día te gustaría que un fotógrafo tome fotos exclusivamente para tu cumple?",
+        tipo: "time",
+    },
+    {
+        id: 4,
+        titulo: "Pasillo",
+        pregunta:
+            "¿A qué hora del día te gustaría escuchar pasillos fuera de tu casa?",
+        tipo: "time",
+    },
+    {
+        id: 5,
+        titulo: "Flores",
+        pregunta: "¿Qué color de flores te gustarían hoy?",
+        tipo: "text",
+    },
+    {
+        id: 6,
+        titulo: "Llamarte",
+        pregunta:
+            "Cuando pueda llamarte para saber cómo estás, ¿me mandarías una señal?",
+        tipo: "text",
+    },
+    {
+        id: 7,
+        titulo: "Libro",
+        pregunta:
+            "¿Cuál es el siguiente libro que te gustaría leer o un título que te gustaría en tu cumpleaños?",
+        tipo: "text",
+    },
+    {
+        id: 8,
+        titulo: "Cena",
+        pregunta:
+            "Sé que hoy no me quieres, pero ¿a qué hora podría pasar por ti?",
+        tipo: "time",
+    },
+    {
+        id: 9,
+        titulo: "Objeto Especial",
+        pregunta:
+            "Entre un álbum de fotos de tu perrita y otro objeto, ¿habría algo que te gustaría diferente?",
+        tipo: "text",
+    },
+    {
+        id: 10,
+        titulo: "Frutillas con Crema",
+        pregunta:
+            "Me mencionaste que tenías un lugar de frutillas con crema, ¿cuál era?",
+        tipo: "text",
+    },
+    {
+        id: 11,
+        titulo: "Fe",
+        pregunta: "¿Qué símbolo religioso te gusta más?",
+        tipo: "text",
+    },
+    {
+        id: 12,
+        titulo: "Postre",
+        pregunta: "¿Cuál es tu postre favorito para hoy?",
+        tipo: "text",
+    },
+    {
+        id: 13,
+        titulo: "Pista Mañana",
+        pregunta: "Dame una pista para la mañana",
+        tipo: "text",
+    },
+    {
+        id: 14,
+        titulo: "Pista Tarde",
+        pregunta: "Dame una pista para la tarde",
+        tipo: "text",
+    },
+    {
+        id: 15,
+        titulo: "Pista Noche",
+        pregunta: "Dame una pista para la noche",
+        tipo: "text",
+    },
+];
+
+const iconosPistas = {
+    1: "🍳", // Desayuno
+    2: "🎯", // Pista Libre
+    3: "📸", // Fotografía
+    4: "🎵", // Pasillo
+    5: "🌸", // Flores
+    6: "📞", // Llamarte
+    7: "📚", // Libro
+    8: "🍽️", // Cena
+    9: "🎁", // Objeto Especial
+    10: "🍓", // Frutillas con Crema
+    11: "✝️", // Fe
+    12: "🍰", // Postre
+    13: "🌅", // Pista Mañana
+    14: "🌇", // Pista Tarde
+    15: "🌙", // Pista Noche
+};
+---
+
+<Layout title="Tablero de Pistas - Tefa">
+    <main class="tablero-container">
+        <h1 class="title sparkle">Tablero de Pistas 🎯</h1>
+
+        <div class="pistas-grid">
+            {
+                pistas.map((pista) => (
+                    <button class="pista-card" data-pista={pista.id}>
+                        <div class="card-content">
+                            <span class="card-number">#{pista.id}</span>
+                            <span class="card-icon">{iconosPistas[pista.id]}</span>
+                            <h3 class="card-title">Pista {pista.titulo}</h3>
+                        </div>
+                    </button>
+                ))
+            }
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="pistaModal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 class="modal-title">
+                    Pista #<span id="pistaNumero"></span>
+                </h2>
+                <div class="pregunta-container">
+                    <p class="pregunta-texto" id="preguntaTexto"></p>
+                    <div class="input-container">
+                        <select
+                            id="selectRespuesta"
+                            class="respuesta-input"
+                            style="display: none;"
+                        >
+                            <option value="">Selecciona una opción</option>
+                        </select>
+                        <input
+                            type="text"
+                            id="textRespuesta"
+                            class="respuesta-input"
+                            style="display: none;"
+                        />
+                        <input
+                            type="time"
+                            id="timeRespuesta"
+                            class="respuesta-input"
+                            style="display: none;"
+                        />
+                    </div>
+                    <button
+                        class="verificar-button"
+                        onclick="enviarRespuesta()"
+                    >
+                        Enviar Respuesta 💝
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script define:vars={{ pistas }}>
+    const modal = document.getElementById("pistaModal");
+    const cards = document.querySelectorAll(".pista-card");
+    const closeButton = document.querySelector(".close-button");
+    const pistaNumero = document.getElementById("pistaNumero");
+    const preguntaTexto = document.getElementById("preguntaTexto");
+    const selectRespuesta = document.getElementById("selectRespuesta");
+    const textRespuesta = document.getElementById("textRespuesta");
+    const timeRespuesta = document.getElementById("timeRespuesta");
+
+    let pistaActual = null;
+
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            const id = parseInt(card.getAttribute("data-pista"));
+            pistaActual = pistas.find((p) => p.id === id);
+
+            pistaNumero.textContent = id;
+            preguntaTexto.textContent = pistaActual.pregunta;
+
+            // Ocultar todos los inputs
+            selectRespuesta.style.display = "none";
+            textRespuesta.style.display = "none";
+            timeRespuesta.style.display = "none";
+
+            // Mostrar el input correspondiente
+            if (pistaActual.tipo === "select") {
+                selectRespuesta.style.display = "block";
+                selectRespuesta.innerHTML =
+                    '<option value="">Selecciona una opción</option>';
+                pistaActual.opciones.forEach((opcion) => {
+                    selectRespuesta.innerHTML += `<option value="${opcion}">${opcion}</option>`;
+                });
+            } else if (pistaActual.tipo === "time") {
+                timeRespuesta.style.display = "block";
+            } else {
+                textRespuesta.style.display = "block";
+            }
+
+            modal.style.display = "block";
+        });
+    });
+
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        pistaActual = null;
+    });
+
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            pistaActual = null;
+        }
+    });
+
+    function enviarRespuesta() {
+        if (!pistaActual) return;
+
+        let respuesta = "";
+        if (pistaActual.tipo === "select") {
+            respuesta = selectRespuesta.value;
+        } else if (pistaActual.tipo === "time") {
+            respuesta = timeRespuesta.value;
+        } else {
+            respuesta = textRespuesta.value;
+        }
+
+        if (!respuesta) {
+            alert("Por favor, ingresa una respuesta");
+            return;
+        }
+
+        try {
+            const mensaje = encodeURIComponent(
+                `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`
+            );
+            
+            // Crear un elemento <a> temporal
+            const link = document.createElement('a');
+            link.href = `https://wa.me/593983352024?text=${mensaje}`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            
+            // Simular clic
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Limpiar y cerrar el modal
+            if (pistaActual.tipo === "select") {
+                selectRespuesta.value = "";
+            } else if (pistaActual.tipo === "time") {
+                timeRespuesta.value = "";
+            } else {
+                textRespuesta.value = "";
+            }
+
+            modal.style.display = "none";
+            pistaActual = null;
+
+        } catch (error) {
+            console.error('Error al abrir WhatsApp:', error);
+            alert('Hubo un error al abrir WhatsApp. Por favor, intenta de nuevo.');
+        }
+    }
+
+    // Agregar evento para enviar con Enter en inputs de texto
+    textRespuesta.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            enviarRespuesta();
+        }
+    });
+
+    // Agregar evento para enviar con Enter en inputs de tiempo
+    timeRespuesta.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            enviarRespuesta();
+        }
+    });
+
+    // Agregar evento para enviar al cambiar select
+    selectRespuesta.addEventListener("change", function() {
+        if (this.value) {
+            enviarRespuesta();
+        }
+    });
+</script>
+
+<style>
+    .tablero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        min-height: 100vh;
+    }
+
+    .title {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .pistas-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .pista-card {
+        background: linear-gradient(135deg, #fff5f8, white);
+        border: none;
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        box-shadow: 0 5px 15px rgba(255, 105, 180, 0.1);
+        position: relative;
+        overflow: hidden;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pista-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .pista-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+    }
+
+    .pista-card:hover::before {
+        opacity: 1;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .card-number {
+        font-size: 1rem;
+        color: #ff69b4;
+        font-weight: bold;
+        background: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 5px rgba(255, 105, 180, 0.2);
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin: 0.5rem 0;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        transition: transform 0.3s ease;
+    }
+
+    .pista-card:hover .card-icon {
+        transform: scale(1.1);
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        color: #ff1493;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: white;
+        margin: 10% auto;
+        padding: 2rem;
+        border-radius: 20px;
+        max-width: 500px;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+    }
+
+    .close-button {
+        position: absolute;
+        right: 1.5rem;
+        top: 1rem;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #ff69b4;
+    }
+
+    .modal-title {
+        color: #ff1493;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .pregunta-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .pregunta-texto {
+        color: #666;
+        text-align: center;
+    }
+
+    .pregunta {
+        font-size: 1.2rem;
+        color: #ff1493;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .respuesta-input {
+        padding: 0.8rem;
+        border: 2px solid #ff69b4;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    .verificar-button {
+        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        color: white;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: transform 0.2s ease;
+    }
+
+    .verificar-button:hover {
+        transform: scale(1.02);
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            margin: 20% auto;
+            padding: 1.5rem;
+        }
+
+        .pistas-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        .pista-card {
+            min-height: 160px;
+            padding: 1.5rem 1rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+        }
+    }
+
+    .input-container {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .respuesta-input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #ff69b4;
+        border-radius: 10px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    select.respuesta-input {
+        background: white;
+        cursor: pointer;
+    }
+
+    .verificar-button {
+        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .verificar-button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    /* Estilos mejorados para el select */
+    select.respuesta-input {
+        appearance: none;
+        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff69b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1rem center;
+        background-size: 1.2em;
+        padding-right: 2.5rem;
+        cursor: pointer;
+        border: 2px solid #ff69b4;
+        transition: all 0.3s ease;
+    }
+
+    select.respuesta-input:hover,
+    select.respuesta-input:focus {
+        border-color: #ff1493;
+        box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+        outline: none;
+    }
+
+    select.respuesta-input option {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    /* Estilos mejorados para inputs */
+    .respuesta-input {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #ff69b4;
+        border-radius: 15px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .respuesta-input:focus {
+        border-color: #ff1493;
+        box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+        outline: none;
+    }
+</style>
+

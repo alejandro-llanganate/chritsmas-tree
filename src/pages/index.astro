@@ -1,0 +1,289 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="El Buzón de Pistas de Tefa 🎁">
+    <main>
+        <div class="container">
+            <h1 class="title bounce">El Buzón de Pistas de Tefa 🎁</h1>
+
+            <div class="mailbox float">
+                <div class="envelope sparkle">
+                    <div class="letter-content">
+                        <div class="heart-seal">💝</div>
+                        <div class="letter-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="message">
+                ¡Hola Tefa! 💖<br />
+                Bienvenida a tu buzón de pistas<br />
+            </p>
+
+            <a href="/introduccion" class="start-button">
+                <span class="button-text">Abrir Buzón</span>
+                <span class="button-icon">✨</span>
+            </a>
+
+            <p class="credits">Creado con 💝 por Alejandro Llanganate</p>
+        </div>
+
+        <div class="decorations">
+            <div class="decoration-item balloon">🎈</div>
+            <div class="decoration-item cake">🎂</div>
+            <div class="decoration-item gift">🎁</div>
+            <div class="decoration-item star">⭐</div>
+            <div class="decoration-item heart">💖</div>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 2rem);
+        padding: 1rem;
+        position: relative;
+        background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+        overflow-x: hidden;
+    }
+
+    .title {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(1.8rem, 5vw, 3.5rem);
+        line-height: 1.2;
+        padding: 0.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .mailbox {
+        width: min(140px, 35vw);
+        height: min(140px, 35vw);
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        border-radius: 15px;
+        position: relative;
+        margin: 1.5rem 0;
+        box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+    }
+
+    .mailbox:hover {
+        transform: translateY(-5px) rotateY(10deg);
+    }
+
+    .envelope {
+        width: 75%;
+        height: 75%;
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .letter-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .heart-seal {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: 0.5rem;
+        animation: pulse 2s infinite;
+    }
+
+    .letter-lines {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .letter-lines span {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    .letter-lines span:nth-child(2) {
+        width: 80%;
+        animation-delay: 0.2s;
+    }
+
+    .letter-lines span:nth-child(3) {
+        width: 60%;
+        animation-delay: 0.4s;
+    }
+
+    .message {
+        font-family: Arial, sans-serif;
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        margin: 1.5rem 0;
+        color: #ff1493;
+        text-align: center;
+        line-height: 1.6;
+        font-weight: 500;
+    }
+
+    .start-button {
+        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transform-origin: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+    }
+
+    .button-icon {
+        font-size: 1.2em;
+    }
+
+    .credits {
+        font-family: Arial, sans-serif;
+        margin-top: 2rem;
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        color: #ff69b4;
+        opacity: 0.9;
+    }
+
+    .decorations {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .decoration-item {
+        position: absolute;
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .balloon {
+        top: 5%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+    .cake {
+        top: 15%;
+        right: 8%;
+        animation-delay: 0.5s;
+    }
+    .gift {
+        bottom: 10%;
+        left: 8%;
+        animation-delay: 1s;
+    }
+    .star {
+        bottom: 15%;
+        right: 5%;
+        animation-delay: 1.5s;
+    }
+    .heart {
+        top: 10%;
+        left: 45%;
+        animation-delay: 2s;
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 1rem 0.5rem;
+        }
+
+        .decoration-item {
+            font-size: 1.2rem;
+        }
+
+        .message {
+            padding: 0 1rem;
+        }
+
+        .mailbox {
+            margin: 1rem 0;
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0);
+        }
+        50% {
+            transform: translateY(-15px) rotate(5deg);
+        }
+    }
+
+    @keyframes sparkle {
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.6;
+            transform: scale(0.95);
+        }
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.3;
+        }
+    }
+</style>
