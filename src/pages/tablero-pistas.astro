@@ -265,22 +265,23 @@ const iconosPistas = {
         }
 
         try {
+            // Formatear el mensaje para WhatsApp
             const mensaje = encodeURIComponent(
                 `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`
             );
-            
-            // Crear un elemento <a> temporal
-            const link = document.createElement('a');
-            link.href = `https://wa.me/593983352024?text=${mensaje}`;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            
-            // Simular clic
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
 
-            // Limpiar y cerrar el modal
+            // Intentar diferentes métodos de apertura de WhatsApp
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Para dispositivos móviles
+                window.location.href = `whatsapp://send?phone=593983352024&text=${mensaje}`;
+            } else {
+                // Para desktop
+                window.open(`https://web.whatsapp.com/send?phone=593983352024&text=${mensaje}`, '_blank');
+            }
+
+            // Limpiar inputs
             if (pistaActual.tipo === "select") {
                 selectRespuesta.value = "";
             } else if (pistaActual.tipo === "time") {
@@ -289,16 +290,21 @@ const iconosPistas = {
                 textRespuesta.value = "";
             }
 
+            // Cerrar modal
             modal.style.display = "none";
             pistaActual = null;
 
         } catch (error) {
             console.error('Error al abrir WhatsApp:', error);
-            alert('Hubo un error al abrir WhatsApp. Por favor, intenta de nuevo.');
+            // Fallback si los métodos anteriores fallan
+            window.open(`https://wa.me/593983352024?text=${mensaje}`, '_blank');
         }
     }
 
-    // Agregar evento para enviar con Enter en inputs de texto
+    // Asegurarnos de que el botón de verificar tenga el evento click
+    document.querySelector('.verificar-button').addEventListener('click', enviarRespuesta);
+
+    // Eventos para enviar con Enter
     textRespuesta.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -306,7 +312,6 @@ const iconosPistas = {
         }
     });
 
-    // Agregar evento para enviar con Enter en inputs de tiempo
     timeRespuesta.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -314,7 +319,7 @@ const iconosPistas = {
         }
     });
 
-    // Agregar evento para enviar al cambiar select
+    // Evento para select
     selectRespuesta.addEventListener("change", function() {
         if (this.value) {
             enviarRespuesta();
