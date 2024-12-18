@@ -182,7 +182,6 @@ const iconosPistas = {
                     </div>
                     <button
                         class="verificar-button"
-                        onclick="enviarRespuesta()"
                     >
                         Enviar Respuesta 💝
                     </button>
@@ -264,45 +263,36 @@ const iconosPistas = {
             return;
         }
 
-        try {
-            // Formatear el mensaje para WhatsApp
-            const mensaje = encodeURIComponent(
-                `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`
-            );
+        // Formatear el mensaje para WhatsApp
+        const mensaje = encodeURIComponent(
+            `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`
+        );
 
-            // Intentar diferentes métodos de apertura de WhatsApp
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                // Para dispositivos móviles
-                window.location.href = `whatsapp://send?phone=593983352024&text=${mensaje}`;
-            } else {
-                // Para desktop
-                window.open(`https://web.whatsapp.com/send?phone=593983352024&text=${mensaje}`, '_blank');
-            }
+        // URL base de WhatsApp
+        const whatsappURL = `https://wa.me/593983352024?text=${mensaje}`;
+        
+        // Abrir WhatsApp en nueva pestaña
+        window.open(whatsappURL, '_blank');
 
-            // Limpiar inputs
-            if (pistaActual.tipo === "select") {
-                selectRespuesta.value = "";
-            } else if (pistaActual.tipo === "time") {
-                timeRespuesta.value = "";
-            } else {
-                textRespuesta.value = "";
-            }
-
-            // Cerrar modal
-            modal.style.display = "none";
-            pistaActual = null;
-
-        } catch (error) {
-            console.error('Error al abrir WhatsApp:', error);
-            // Fallback si los métodos anteriores fallan
-            window.open(`https://wa.me/593983352024?text=${mensaje}`, '_blank');
+        // Limpiar el formulario
+        if (pistaActual.tipo === "select") {
+            selectRespuesta.value = "";
+        } else if (pistaActual.tipo === "time") {
+            timeRespuesta.value = "";
+        } else {
+            textRespuesta.value = "";
         }
+
+        // Cerrar el modal
+        modal.style.display = "none";
+        pistaActual = null;
     }
 
-    // Asegurarnos de que el botón de verificar tenga el evento click
-    document.querySelector('.verificar-button').addEventListener('click', enviarRespuesta);
+    // Agregar el event listener al botón
+    const verificarButton = document.querySelector('.verificar-button');
+    if (verificarButton) {
+        verificarButton.addEventListener('click', enviarRespuesta);
+    }
 
     // Eventos para enviar con Enter
     textRespuesta.addEventListener("keypress", function(event) {
