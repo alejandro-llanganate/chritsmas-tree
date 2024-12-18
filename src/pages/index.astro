@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getPath } from '../utils/path';
+import { ROUTES } from '../config/routes';
 ---
 
 <Layout title="El Buzón de Pistas de Tefa 🎁">
@@ -26,7 +27,7 @@ import { getPath } from '../utils/path';
                 Bienvenida a tu buzón de pistas<br />
             </p>
 
-            <a href="/birthday-tefa/introduccion" class="start-button">
+            <a href={ROUTES.INTRO} class="start-button">
                 <span class="button-text">Abrir Buzón</span>
                 <span class="button-icon">✨</span>
             </a>
