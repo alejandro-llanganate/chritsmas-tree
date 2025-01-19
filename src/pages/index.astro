@@ -1,291 +1,539 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPath } from '../utils/path';
-import { ROUTES } from '../config/routes';
+import { ROUTES } from "../config/routes";
 ---
 
-<Layout title="El Buzón de Pistas de Babe 🎁">
+<Layout title="El Árbol de los Deseos de Babe 🎄">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet"
+    />
+
     <main>
         <div class="container">
-            <h1 class="title bounce">El Buzón de Pistas de Babe 🎁</h1>
+            <div id="intro-modal" class="intro-modal">
+                <div class="intro-content">
+                    <h2 class="intro-title">Mi Regalo de Navidad 💝</h2>
+                    <p class="intro-text">
+                        Para mi navidad eres tú, ese milagro de navidad que me
+                        cambió, que me está mejorando y que espero que
+                        construyamos algo hermoso juntos. Lo estamos haciendo...
+                    </p>
+                    <p class="intro-text">
+                        Dijiste seis meses, pues he pensado muchas cosas,
+                        diferentes regalos que te quiero dar en cada mes a
+                        partir de navidad para poder fortalecer nuestro
+                        compromiso y que esto funcione porque quiero que
+                        funcione.
+                    </p>
+                    <button id="start-journey" class="start-button"
+                        >Comenzar el Viaje ✨</button
+                    >
+                </div>
+            </div>
 
-            <div class="mailbox float">
-                <div class="envelope sparkle">
-                    <div class="letter-content">
-                        <div class="heart-seal">💝</div>
-                        <div class="letter-lines">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+            <div id="main-content" class="main-content hidden">
+                <h1 class="title bounce">Nuestro Árbol de los Deseos 🎄</h1>
+
+                <div class="christmas-tree">
+                    <div class="star">⭐</div>
+                    <div class="tree-body">
+                        <div class="tree-section"></div>
+                        <div class="tree-section"></div>
+                        <div class="tree-section"></div>
+                        <div class="tree-section"></div>
+                        <div class="ornaments">
+                            <span class="ornament">🎄</span>
+                            <span class="ornament">✨</span>
+                            <span class="ornament">💫</span>
+                            <span class="ornament">❄️</span>
+                            <span class="ornament">🎁</span>
                         </div>
+                        <div class="lights"></div>
+                    </div>
+                    <div class="trunk"></div>
+                </div>
+
+                <div class="gifts-container">
+                    <div class="gift" data-gift="spirituality">
+                        <span class="gift-label">Espiritualidad</span>
+                        <div class="gift-box">🙏</div>
+                    </div>
+                    <div class="gift" data-gift="health">
+                        <span class="gift-label">Salud</span>
+                        <div class="gift-box">💆‍♀️</div>
+                    </div>
+                    <div class="gift" data-gift="social">
+                        <span class="gift-label">Ayuda Social</span>
+                        <div class="gift-box">🐕</div>
+                    </div>
+                    <div class="gift" data-gift="recreation">
+                        <span class="gift-label">Recreación</span>
+                        <div class="gift-box">🏰</div>
+                    </div>
+                    <div class="gift" data-gift="physical">
+                        <span class="gift-label">Físico</span>
+                        <div class="gift-box">🏡</div>
+                    </div>
+                    <div class="gift" data-gift="love">
+                        <span class="gift-label">Amor</span>
+                        <div class="gift-box">💝</div>
+                    </div>
+                </div>
+
+                <div id="gift-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h2 class="modal-title"></h2>
+                        <div class="modal-body"></div>
                     </div>
                 </div>
             </div>
 
-            <p class="message">
-                Hola Babe! 💖<br />
-                Bienvenida a tu buzón de pistas<br />
-            </p>
-
-            <a href={ROUTES.INTRO} class="start-button">
-                <span class="button-text">Abrir Buzón</span>
-                <span class="button-icon">✨</span>
-            </a>
-
             <p class="credits">Creado con 💝 por Alejandro Llanganate</p>
-        </div>
-
-        <div class="decorations">
-            <div class="decoration-item balloon">🎈</div>
-            <div class="decoration-item cake">🎂</div>
-            <div class="decoration-item gift">🎁</div>
-            <div class="decoration-item star">⭐</div>
-            <div class="decoration-item heart">💖</div>
         </div>
     </main>
 </Layout>
 
 <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+    }
+
     .container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: calc(100vh - 2rem);
-        padding: 1rem;
-        position: relative;
-        background: linear-gradient(135deg, #ffe6f2, #fff0f5);
-        overflow-x: hidden;
-    }
-
-    .title {
-        font-family: "Dancing Script", cursive;
-        font-size: clamp(1.8rem, 5vw, 3.5rem);
-        line-height: 1.2;
-        padding: 0.5rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        background: linear-gradient(45deg, #ff1493, #ff69b4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .mailbox {
-        width: min(140px, 35vw);
-        height: min(140px, 35vw);
-        background: linear-gradient(45deg, #ff69b4, #ff1493);
-        border-radius: 15px;
-        position: relative;
-        margin: 1.5rem 0;
-        box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
-        transform-style: preserve-3d;
-        transition: transform 0.3s ease;
-    }
-
-    .mailbox:hover {
-        transform: translateY(-5px) rotateY(10deg);
-    }
-
-    .envelope {
-        width: 75%;
-        height: 75%;
-        background: white;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-
-    .letter-content {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-
-    .heart-seal {
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        margin-bottom: 0.5rem;
-        animation: pulse 2s infinite;
-    }
-
-    .letter-lines {
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .letter-lines span {
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #ff69b4, transparent);
-        animation: shimmer 2s infinite;
-    }
-
-    .letter-lines span:nth-child(2) {
-        width: 80%;
-        animation-delay: 0.2s;
-    }
-
-    .letter-lines span:nth-child(3) {
-        width: 60%;
-        animation-delay: 0.4s;
-    }
-
-    .message {
-        font-family: Arial, sans-serif;
-        font-size: clamp(1rem, 3vw, 1.3rem);
-        margin: 1.5rem 0;
-        color: #ff1493;
-        text-align: center;
-        line-height: 1.6;
-        font-weight: 500;
-    }
-
-    .start-button {
-        background: linear-gradient(45deg, #ff1493, #ff69b4);
+        min-height: 100vh;
+        background: linear-gradient(135deg, #000000, #0a0a0a);
         color: white;
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        text-decoration: none;
-        font-family: Arial, sans-serif;
-        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transform-origin: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+        font-family: "Poppins", sans-serif;
     }
 
-    .start-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
-    }
-
-    .button-icon {
-        font-size: 1.2em;
-    }
-
-    .credits {
-        font-family: Arial, sans-serif;
-        margin-top: 2rem;
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-        color: #ff69b4;
-        opacity: 0.9;
-    }
-
-    .decorations {
+    .intro-modal {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none;
-        z-index: 1;
+        background: linear-gradient(135deg, #000000, #0a0a0a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
     }
 
-    .decoration-item {
+    .intro-content {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2.5rem;
+        border-radius: 20px;
+        max-width: 600px;
+        margin: 1rem;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.1);
+        animation: fadeIn 1s ease-out;
+    }
+
+    .intro-title {
+        font-family: "Mountains of Christmas", cursive;
+        color: #ffd700;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .intro-text {
+        color: #fff;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .start-button {
+        background: linear-gradient(45deg, #ffd700, #ff8c00);
+        border: none;
+        padding: 1rem 2rem;
+        color: white;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: block;
+        margin: 2rem auto 0;
+        transition: all 0.3s ease;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .christmas-tree {
+        position: relative;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem 0;
+        animation: treeEntrance 1s ease-out;
+    }
+
+    .star {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: starTwinkle 2s infinite;
+        z-index: 2;
+        filter: drop-shadow(0 0 15px gold);
+    }
+
+    .tree-body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tree-section {
+        width: 0;
+        height: 0;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-bottom: 160px solid #0f5132;
+        margin-top: -80px;
+        position: relative;
+        filter: drop-shadow(0 0 10px rgba(15, 81, 50, 0.5));
+    }
+
+    .tree-section:nth-child(2) {
+        transform: scale(0.85);
+    }
+    .tree-section:nth-child(3) {
+        transform: scale(0.7);
+    }
+    .tree-section:nth-child(4) {
+        transform: scale(0.55);
+    }
+
+    .ornaments {
         position: absolute;
-        font-size: clamp(1.2rem, 4vw, 2rem);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .ornament {
+        position: absolute;
+        font-size: 1.5rem;
         animation: float 3s ease-in-out infinite;
     }
 
-    .balloon {
-        top: 5%;
-        left: 5%;
+    .ornament:nth-child(1) {
+        top: 20%;
+        left: 30%;
         animation-delay: 0s;
     }
-    .cake {
-        top: 15%;
-        right: 8%;
+    .ornament:nth-child(2) {
+        top: 40%;
+        right: 25%;
         animation-delay: 0.5s;
     }
-    .gift {
-        bottom: 10%;
-        left: 8%;
+    .ornament:nth-child(3) {
+        top: 60%;
+        left: 35%;
         animation-delay: 1s;
     }
-    .star {
-        bottom: 15%;
-        right: 5%;
+    .ornament:nth-child(4) {
+        top: 30%;
+        right: 35%;
         animation-delay: 1.5s;
     }
-    .heart {
-        top: 10%;
-        left: 45%;
+    .ornament:nth-child(5) {
+        top: 50%;
+        left: 25%;
         animation-delay: 2s;
     }
 
-    @media (max-width: 480px) {
-        .container {
-            padding: 1rem 0.5rem;
-        }
+    .lights {
+        position: absolute;
+        top: 0;
+        left: -150px;
+        right: -150px;
+        bottom: 0;
+        background:
+            radial-gradient(circle at center, #fff 1px, transparent 1px) 0 0 /
+                30px 30px,
+            radial-gradient(circle at center, #ffeb3b 1px, transparent 1px) 15px
+                15px / 30px 30px;
+        animation: twinkle 1.5s ease-in-out infinite alternate;
+        opacity: 0.5;
+    }
 
-        .decoration-item {
-            font-size: 1.2rem;
-        }
+    .trunk {
+        width: 40px;
+        height: 80px;
+        background: linear-gradient(45deg, #8b4513, #a0522d);
+        margin-top: -40px;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
 
-        .message {
-            padding: 0 1rem;
-        }
+    .gifts-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: -3rem;
+        padding: 0 1rem;
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+    }
 
-        .mailbox {
-            margin: 1rem 0;
-        }
+    .gift {
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 0 1 calc(33.333% - 1rem);
+        min-width: 80px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .gift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .gift-box {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
     }
 
     @keyframes float {
         0%,
         100% {
-            transform: translateY(0) rotate(0);
+            transform: translateY(0);
         }
         50% {
-            transform: translateY(-15px) rotate(5deg);
+            transform: translateY(-10px);
         }
     }
 
-    @keyframes sparkle {
-        0%,
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.6;
-            transform: scale(0.95);
-        }
-    }
-
-    @keyframes pulse {
-        0%,
-        100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.1);
-        }
-    }
-
-    @keyframes shimmer {
+    @keyframes twinkle {
         0% {
             opacity: 0.3;
         }
-        50% {
-            opacity: 1;
-        }
         100% {
-            opacity: 0.3;
+            opacity: 0.6;
         }
     }
+
+    @keyframes starTwinkle {
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+        padding: 2.5rem;
+        border-radius: 20px;
+        max-width: 600px;
+        width: 90%;
+        margin: 1rem;
+        position: relative;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+    }
+
+    .modal.active .modal-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .modal-title {
+        font-family: "Mountains of Christmas", cursive;
+        color: #ffd700;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .modal-body {
+        color: #fff;
+        line-height: 1.8;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .close-button {
+        position: absolute;
+        right: 1.5rem;
+        top: 1rem;
+        font-size: 2rem;
+        color: #ffd700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+        transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .modal-text {
+        color: #fff;
+        line-height: 1.8;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-top: 0;
+    }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const introModal = document.getElementById("intro-modal");
+        const mainContent = document.getElementById("main-content");
+        const startButton = document.getElementById("start-journey");
+        const modal = document.getElementById("gift-modal");
+        const modalTitle = modal.querySelector(".modal-title");
+        const modalBody = modal.querySelector(".modal-body");
+        const closeButton = modal.querySelector(".close-button");
+        const gifts = document.querySelectorAll(".gift");
+
+        // Contenido de los regalos
+        const giftContents = {
+            spirituality: {
+                title: "Espiritualidad 🙏",
+                content: "Quiero que vayamos juntos al Santuario Señor de la Justicia de la Parroquia San Sebastián y oremos juntos, el 19 de enero me gustaría."
+            },
+            health: {
+                title: "Salud y Bienestar 💆‍♀️",
+                content: "Quiero llevarte al El Refugio Spa Garden entre las fechas del 18 al 19 de febrero. La salud es importante y siento que un SPA ayuda mucho también al cuerpo y has tenido un año con mucho ejercicio y quiero cuidarlo."
+            },
+            social: {
+                title: "Ayuda Social 🐕",
+                content: "Te propongo la primera semana de marzo poder hacer lo que hicimos de los perritos pero para el doble de perros, es decir no una funda de alimentos sino dos."
+            },
+            recreation: {
+                title: "Recreación 🏰",
+                content: "Quiero llevarte a Cuenca y conocer más de tu historia allá y tener 24 horas solo para conocer nuevos lugares y luego hacer un album de fotos con todo lo que hayamos recorrido. Esto te propongo en la tercer o cuarta semana de Abril."
+            },
+            physical: {
+                title: "Físico 🏡",
+                content: "Quiero que vayamos a un airbnb que ambos escojamos fuera de quito, esa es la única condición y que podamos cumplir al menos tres fetiches tuyos."
+            },
+            love: {
+                title: "Amor 💝",
+                content: "Este mes he investigado bastante pero bastante y el único lugar para ver las auroras boreales es en Canadá en Montañas Rocosas, ya vi costos sé que me tengo que esforzar bastante pero quiero llevarte allá."
+            }
+        };
+
+        // Inicializar vista
+        mainContent.classList.add("hidden");
+
+        // Manejador del botón de inicio
+        startButton.addEventListener("click", () => {
+            introModal.style.display = "none";
+            mainContent.classList.remove("hidden");
+        });
+
+        // Función para abrir modal
+        function openModal(giftType) {
+            const content = giftContents[giftType];
+            if (content) {
+                modalTitle.textContent = content.title;
+                modalBody.innerHTML = `
+                    <p class="modal-text">${content.content}</p>
+                `;
+                modal.classList.remove("hidden");
+                setTimeout(() => {
+                    modal.classList.add("active");
+                }, 10);
+            }
+        }
+
+        // Función para cerrar modal
+        function closeModal() {
+            modal.classList.remove("active");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 300);
+        }
+
+        // Agregar event listeners
+        gifts.forEach((gift) => {
+            gift.addEventListener("click", () => {
+                const giftType = gift.getAttribute("data-gift");
+                openModal(giftType);
+            });
+        });
+
+        closeButton.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+</script>
