@@ -133,7 +133,9 @@ const iconosPistas = {
         <h1 class="title sparkle">Tablero de Pistas 🎯</h1>
 
         <div class="navigation">
-            <a href="/birthday-tefa/introduccion" class="nav-button">← Volver</a>
+            <a href="/chritsmas-tree/introduccion" class="nav-button"
+                >← Volver</a
+            >
         </div>
 
         <div class="pistas-grid">
@@ -142,7 +144,9 @@ const iconosPistas = {
                     <button class="pista-card" data-pista={pista.id}>
                         <div class="card-content">
                             <span class="card-number">#{pista.id}</span>
-                            <span class="card-icon">{iconosPistas[pista.id]}</span>
+                            <span class="card-icon">
+                                {iconosPistas[pista.id]}
+                            </span>
                             <h3 class="card-title">Pista {pista.titulo}</h3>
                         </div>
                     </button>
@@ -180,9 +184,7 @@ const iconosPistas = {
                             style="display: none;"
                         />
                     </div>
-                    <button
-                        class="verificar-button"
-                    >
+                    <button class="verificar-button">
                         Enviar Respuesta 💝
                     </button>
                 </div>
@@ -265,14 +267,14 @@ const iconosPistas = {
 
         // Formatear el mensaje para WhatsApp
         const mensaje = encodeURIComponent(
-            `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`
+            `*Pista ${pistaActual.id}: ${pistaActual.titulo}*\n${respuesta}`,
         );
 
         // URL base de WhatsApp
         const whatsappURL = `https://wa.me/593983352024?text=${mensaje}`;
-        
+
         // Abrir WhatsApp en nueva pestaña
-        window.open(whatsappURL, '_blank');
+        window.open(whatsappURL, "_blank");
 
         // Limpiar el formulario
         if (pistaActual.tipo === "select") {
@@ -289,20 +291,20 @@ const iconosPistas = {
     }
 
     // Agregar el event listener al botón
-    const verificarButton = document.querySelector('.verificar-button');
+    const verificarButton = document.querySelector(".verificar-button");
     if (verificarButton) {
-        verificarButton.addEventListener('click', enviarRespuesta);
+        verificarButton.addEventListener("click", enviarRespuesta);
     }
 
     // Eventos para enviar con Enter
-    textRespuesta.addEventListener("keypress", function(event) {
+    textRespuesta.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
             enviarRespuesta();
         }
     });
 
-    timeRespuesta.addEventListener("keypress", function(event) {
+    timeRespuesta.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
             enviarRespuesta();
@@ -310,7 +312,7 @@ const iconosPistas = {
     });
 
     // Evento para select
-    selectRespuesta.addEventListener("change", function() {
+    selectRespuesta.addEventListener("change", function () {
         if (this.value) {
             enviarRespuesta();
         }
@@ -359,13 +361,17 @@ const iconosPistas = {
     }
 
     .pista-card::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(45deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
+        background: linear-gradient(
+            45deg,
+            rgba(255, 20, 147, 0.1),
+            rgba(255, 105, 180, 0.1)
+        );
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -573,7 +579,9 @@ const iconosPistas = {
     /* Estilos mejorados para el select */
     select.respuesta-input {
         appearance: none;
-        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff69b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1rem center;
+        background: white
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff69b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")
+            no-repeat right 1rem center;
         background-size: 1.2em;
         padding-right: 2.5rem;
         cursor: pointer;
@@ -610,4 +618,3 @@ const iconosPistas = {
         outline: none;
     }
 </style>
-

@@ -1,5 +1,5 @@
 export const ROUTES = {
-    HOME: '/birthday-tefa/',
-    INTRO: '/birthday-tefa/introduccion',
-    TABLERO: '/birthday-tefa/tablero-pistas'
+    HOME: '/chritsmas-tree/',
+    INTRO: '/chritsmas-tree/introduccion',
+    TABLERO: '/chritsmas-tree/tablero-pistas'
 }; 
