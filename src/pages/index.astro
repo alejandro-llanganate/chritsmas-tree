@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ROUTES } from "../config/routes";
+import { getPath } from "../utils/path";
 ---
 
 <Layout title="El Árbol de los Deseos de Babe 🎄">
@@ -465,28 +466,34 @@ import { ROUTES } from "../config/routes";
         const giftContents = {
             spirituality: {
                 title: "Espiritualidad 🙏",
-                content: "Quiero que vayamos juntos al Santuario Señor de la Justicia de la Parroquia San Sebastián y oremos juntos, el 19 de enero me gustaría."
+                content:
+                    "Quiero que vayamos juntos al Santuario Señor de la Justicia de la Parroquia San Sebastián y oremos juntos, el 19 de enero me gustaría.",
             },
             health: {
                 title: "Salud y Bienestar 💆‍♀️",
-                content: "Quiero llevarte al El Refugio Spa Garden entre las fechas del 18 al 19 de febrero. La salud es importante y siento que un SPA ayuda mucho también al cuerpo y has tenido un año con mucho ejercicio y quiero cuidarlo."
+                content:
+                    "Quiero llevarte al El Refugio Spa Garden entre las fechas del 18 al 19 de febrero. La salud es importante y siento que un SPA ayuda mucho también al cuerpo y has tenido un año con mucho ejercicio y quiero cuidarlo.",
             },
             social: {
                 title: "Ayuda Social 🐕",
-                content: "Te propongo la primera semana de marzo poder hacer lo que hicimos de los perritos pero para el doble de perros, es decir no una funda de alimentos sino dos."
+                content:
+                    "Te propongo la primera semana de marzo poder hacer lo que hicimos de los perritos pero para el doble de perros, es decir no una funda de alimentos sino dos.",
             },
             recreation: {
                 title: "Recreación 🏰",
-                content: "Quiero llevarte a Cuenca y conocer más de tu historia allá y tener 24 horas solo para conocer nuevos lugares y luego hacer un album de fotos con todo lo que hayamos recorrido. Esto te propongo en la tercer o cuarta semana de Abril."
+                content:
+                    "Quiero llevarte a Cuenca y conocer más de tu historia allá y tener 24 horas solo para conocer nuevos lugares y luego hacer un album de fotos con todo lo que hayamos recorrido. Esto te propongo en la tercer o cuarta semana de Abril.",
             },
             physical: {
                 title: "Físico 🏡",
-                content: "Quiero que vayamos a un airbnb que ambos escojamos fuera de quito, esa es la única condición y que podamos cumplir al menos tres fetiches tuyos."
+                content:
+                    "Quiero que vayamos a un airbnb que ambos escojamos fuera de quito, esa es la única condición y que podamos cumplir al menos tres fetiches tuyos.",
             },
             love: {
                 title: "Amor 💝",
-                content: "Este mes he investigado bastante pero bastante y el único lugar para ver las auroras boreales es en Canadá en Montañas Rocosas, ya vi costos sé que me tengo que esforzar bastante pero quiero llevarte allá."
-            }
+                content:
+                    "Este mes he investigado bastante pero bastante y el único lugar para ver las auroras boreales es en Canadá en Montañas Rocosas, ya vi costos sé que me tengo que esforzar bastante pero quiero llevarte allá.",
+            },
         };
 
         // Inicializar vista
